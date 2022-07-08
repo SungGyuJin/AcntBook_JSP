@@ -3,6 +3,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="Dao.DBcon"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -42,9 +43,16 @@
 		width: 30%;
 		text-align: center;
 	}
-	#separation{
+	#kind{
 		background-color: #00CCCC;
 		color: black;
+	}
+	#btn_del{
+		width: 100%;
+	}
+	#input_chk{
+		width: 30px;
+		height: 30px;
 	}
 </style>
 </head>
@@ -53,7 +61,6 @@
 	out.println(yearParam);
 	out.println(monthParam);
 	out.println(dateParam);
-	
 %>
 <form action="Del" method="post">
 	<input type="text" name="year" value="<%= yearParam%>">
@@ -70,26 +77,50 @@
 				<th>금액</th>
 			</tr>
 		<%
-			while(rs.next()){
 				String kind = "";
+
+				ArrayList<String> list = new ArrayList<>();
+				
+			while(rs.next()){
+				
+				
 				if(rs.getString("kind").equals("+")){
 					kind = "➕";
 				}else{
 					kind = "➖";
 				}
+				
+				list.add(kind); // 거래내역 데이터를 결정할 list에 추가
+				
 		%>
 				<tr>
-					<td class="td" ><input type="checkbox" name="chkItem" value="<%= rs.getString("regNum") %>"></td>
-					<td id="separation" class="td" ><%= kind %></td>
+					<td class="td" ><input type="checkbox" id="input_chk" name="chkItem" value="<%= rs.getString("regNum") %>"></td>
+					<td class="td" id="kind"><%= kind %></td>
 					<td class="td" ><%= rs.getString("item") %></td>
 					<td class="td" ><%= rs.getString("price") %>원</td>
 				</tr>
 		<%
+			
 			}
+
+				if(list.size() == 0){
+		%>
+				<tr>
+					<td colspan="4">
+						<h3>거래내역이 없습니다.</h3>
+					</td>
+				</tr>
+		<%
+				}
+			if(list.size() != 0){
 		%>
 			<tr>
-				<td colspan="4" align="center"><input type="submit" value="삭제" onClick="return Del()"></td>
+				<td colspan="4" align="center"><input type="submit" id="btn_del" value="삭제" onClick="return Del()"></td>
 			</tr>
+		<%
+			}
+		%>
+		
 		</table>
 </form>
 <script>

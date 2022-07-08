@@ -4,7 +4,7 @@
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header.jsp"%>
+<%@include file="includes/header.jsp"%>
 <%
 	String sql = "Select max(regNum)+1 max From acntAdd";
 	Connection con = DBcon.getConnection();

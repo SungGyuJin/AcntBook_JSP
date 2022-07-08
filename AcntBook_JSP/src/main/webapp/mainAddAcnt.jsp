@@ -6,8 +6,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.Calendar"%>
-<%@include file="../includes/header.jsp"%>
-<jsp:include page="cntHeader.jsp" />
+<%@include file="includes/header.jsp"%>
+<jsp:include page="includes/cntHeader.jsp" />
 <jsp:include page="theList.jsp" />
 
 <%
@@ -26,16 +26,20 @@
 	if(strYear != null){
 		year = Integer.parseInt(strYear);
 	}
+	
 	if(strMonth != null){
+		
 		month = Integer.parseInt(strMonth);
 		if(month > 11){
-	month = 0;
-	year = year + 1;
+			month = 0;
+			year = year + 1;
 		}else if(month < 0){
-	month = 11;
-	year = year - 1;
+			month = 11;
+			year = year - 1;
 		}
+		
 	}
+	
 	ca.set(year, month, 1);
 	// 웹에서 년도는 2021 년이라고 나오지만 월은 9월이라고 나온다.
 	// 하지만 달력을 비교하면 10월 달력과 같다. 그렇다. 자바프로그래밍의 달력의 월은 0 ~ 11로 계산하니
@@ -250,7 +254,6 @@
 				// 1일 시작 날짜 and 1 2 3 4 ... 31 테이블 하나당 날짜찍기
 				// 한 주의 토요일이 끝나면 개행
 				
-				
 				int count = 0; // 개행을 위한  count 변수선언
 							
 				/* 1일이 시작되기전까지 빈칸을 찍는 작업 */
@@ -263,7 +266,7 @@
 				Connection conn = DBcon.getConnection();
 				Statement stmt = conn.createStatement();
 				
-				//빈칸은 끝났다 이제 말일까지 날짜를 찍자
+				// 빈칸은 끝났다 이제 말일까지 날짜를 찍자
 				for(int day = 1; day <= lastDate; day++){
 					ArrayList<String> list = new ArrayList<>();
 					String regData = (Integer.toString(year) + Integer.toString(month + 1)) + Integer.toString(day); // 년, 월 합체
