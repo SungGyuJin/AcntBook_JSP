@@ -43,9 +43,11 @@
 		width: 30%;
 		text-align: center;
 	}
-	#kind{
+	#addKind{
 		background-color: #00CCCC;
-		color: black;
+	}
+	#subKind{
+		background-color: pink;
 	}
 	#btn_del{
 		width: 100%;
@@ -78,16 +80,19 @@
 			</tr>
 		<%
 				String kind = "";
+				String addKind = "";
+				String subKind = "";
 
 				ArrayList<String> list = new ArrayList<>();
 				
 			while(rs.next()){
 				
-				
 				if(rs.getString("kind").equals("+")){
 					kind = "➕";
+					addKind = "➕";
 				}else{
 					kind = "➖";
+					subKind = "➖";
 				}
 				
 				list.add(kind); // 거래내역 데이터를 결정할 list에 추가
@@ -95,7 +100,17 @@
 		%>
 				<tr>
 					<td class="td" ><input type="checkbox" id="input_chk" name="chkItem" value="<%= rs.getString("regNum") %>"></td>
-					<td class="td" id="kind"><%= kind %></td>
+		<% 
+					if(kind.equals("➕")){
+		%>		
+					<td class="td" id="addKind"><%= addKind %></td>
+		<%
+					}else{
+		%>
+					<td class="td" id="subKind"><%= subKind %></td>
+		<%
+					}
+		%>
 					<td class="td" ><%= rs.getString("item") %></td>
 					<td class="td" ><%= rs.getString("price") %>원</td>
 				</tr>
