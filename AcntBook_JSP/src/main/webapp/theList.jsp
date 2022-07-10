@@ -70,7 +70,9 @@
 	<input type="text" name="dat" value="<%= dateParam%>">
 		<table id="theListTable" class="table table-dark" align="center">
 			<tr>
-				<td class="td" colspan="4"><%= yearParam %>년&nbsp;<%= Integer.parseInt(monthParam)+1 %>월&nbsp;<%= dateParam %>일</td>
+				<td class="td" colspan="4">
+					<h2><%= yearParam %>년&nbsp;<%= Integer.parseInt(monthParam)+1 %>월&nbsp;<%= dateParam %>일</h2>
+				</td>
 			</tr>
 			<tr>
 				<th>선택</th>
@@ -115,7 +117,6 @@
 					<td class="td" ><%= rs.getString("price") %>원</td>
 				</tr>
 		<%
-			
 			}
 
 				if(list.size() == 0){
@@ -130,18 +131,32 @@
 			if(list.size() != 0){
 		%>
 			<tr>
-				<td colspan="4" align="center"><input type="submit" id="btn_del" value="삭제" onClick="return Del()"></td>
+				<td colspan="4" align="center">
+					<input type="submit" id="btn_del" value="삭제" onClick="return delChk()">
+				</td>
 			</tr>
 		<%
 			}
 		%>
-		
 		</table>
 </form>
 <script>
-	function Del(){
-		alert("삭제완료!!");
+
+	function delChk(){
+		
+		if($("#input_chk").is(":checked") == false){
+			
+			alert("삭제 할 항목을 체크해주세요.");
+			return false;
+		}else{
+			alert("삭제되었습니다.");
+			return true;
+		}
 	}
+	
+	
+	
+	
 </script>
 </body>
 </html>
