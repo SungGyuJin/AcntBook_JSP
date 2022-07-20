@@ -21,7 +21,7 @@
 	String strYear = request.getParameter("year");
 	String strMonth = request.getParameter("month");
 	
-	int year = ca.get(Calendar.YEAR);
+	int year = ca.get(Calendar.YEAR);	 
 	int month = ca.get(Calendar.MONTH);
 	if(strYear != null){
 		year = Integer.parseInt(strYear);
@@ -39,7 +39,7 @@
 		}
 		
 	}
-	
+		
 	ca.set(year, month, 1);
 	// 웹에서 년도는 2021 년이라고 나오지만 월은 9월이라고 나온다.
 	// 하지만 달력을 비교하면 10월 달력과 같다. 그렇다. 자바프로그래밍의 달력의 월은 0 ~ 11로 계산하니
@@ -58,7 +58,7 @@
 		if(dayOfweek == num){
 	d = arr[num - 1];
 		}
-	}
+	}	
 	//out.print(year + "년<br>");
 	//out.print(month + 1 + "월<br>");
 	//out.print("1일 시작요일 : " + d +"<br>");
@@ -241,7 +241,7 @@
 			<tr>
 				<th style="color: red; font-size: 20px; font-style: italic;">Sun</th>
 				<th class="th">Mon</th>
-				<th class="th">Tue</th>	
+				<th class="th">Tue</th>
 				<th class="th">Wed</th>
 				<th class="th">Thu</th>
 				<th class="th">Fri</th>
@@ -391,8 +391,7 @@
 			alert("ㅎㅇㅎㅇㅇㅇ");
 		});
 	});
-
-
+	
 
 
 </script>
