@@ -227,6 +227,7 @@
 				<td style="background-color: rgb(255, 250, 147);"><a style="color: black; font-style: italic;" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month + 1%>">다음달</a></td>
 				<td style="background-color: rgb(238, 130, 238);"><a href="mainAddAcnt.jsp?&year=<%=year + 1%>">▶</a></td>
 			-->
+			
 				<td><a href="mainAddAcnt.jsp?&year=<%=year - 1%>">◀</a></td>
 				<td><a style="color: black; font-style: italic;" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month - 1%>">이전달</a></td>
 				<td><a style="color: black; font-style: italic; font-size: 20px;" href="mainAddAcnt.jsp?&param=<%=today%>"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
