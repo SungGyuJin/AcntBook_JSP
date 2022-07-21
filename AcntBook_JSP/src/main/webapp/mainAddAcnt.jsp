@@ -206,6 +206,8 @@
 	out.print(month+"<br>");
 	out.print(dat+"<br>");
 %>
+
+
 	<input type="text" id="btn_test" value="<%=dat%>"><br>
 	<table align="center">
 		<tr>
