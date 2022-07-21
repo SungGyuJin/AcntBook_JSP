@@ -14,5 +14,6 @@ public class DBcon {
 			System.out.println("oracle success");
 		}
 		return con;
+		
 	}
 }
