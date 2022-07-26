@@ -8,7 +8,6 @@
 <%@page import="java.util.Calendar"%>
 <%@include file="includes/header.jsp"%>
 <jsp:include page="includes/cntHeader.jsp" />
-<jsp:include page="theList.jsp" />
 
 <%
 	//달력 객체생성
@@ -79,33 +78,18 @@
 <meta charset="UTF-8">
 <title>_acnt</title>
 <style>
-	#table_1{
+	#calMove{
 		margin: auto;
 		text-align: center;
 		font-size: x-large;
 		width: 100%;
 		background-color: white;
 	}
-	#table_2{
-		width: 70%;
+	#calMain{
+		width: 100%;
 		height: 100%;
 		text-align: center;
 		font-size: x-large;
-		background-color: white;
-	}
-	#table_3{
-		font-size: x-large;
-		text-align: center;
-		width: 400px;
-		float: left;
-		background-color: white;
-		margin-right: 50px;
-	}
-	#table_4{
-		font-size: x-large;
-		text-align: center;
-		width: 600px;
-		margin-right: 100px;
 		background-color: white;
 	}
 	.input_1{
@@ -169,57 +153,37 @@
 		font-weight: bold;
 	}
 	
-	/* 계산기 스타일
-	.calInput{
-		width: 100px;
-		height: 100px;
-		font-size: 50px;
-		border: none;
-		background-color: black;
-		color: white;
+	/* div 화면 등분*/
+	div{
+		width:50%;
+		float: left;
+	}
+	div.left{
+		width:50%;
+		float: left;
+		background: black;
+	}
+	div.right{
+		width: 50%;
+		float: rigth;
+		
 	}
 	
-	#view{
-		width: 300px;
-		text-align: right;
-	}
-	#zero{
-		width: 200px;
-	}
-	#calTable{
-		background-color: black;
-	}
-	.compute{
-		background-color: orange;
-		width: 100px;
-		height: 100px;
-		font-size: 50px;
-		border: none;
-	}
-	*/
 </style>
 </head>
 <body>
-<input type="button" id="btn_test" value="테스트"/>
-<%
-	out.print(year+"<br>");
-	out.print(month+"<br>");
-	out.print(dat+"<br>");
-%>
-
-
-	<input type="text" id="btn_test" value="<%=dat%>"><br>
-	<table align="center">
+<div class="left">
+	<%-- <table align="center">
 		<tr>
 			<td>
-				<a href="reg.jsp?regDate=<%=year+Integer.toString(month+1)+dat%>&year=<%=year%>&month=<%=month + 1%>&param=<%=dat%>" onClick="return regChk()">
+				<a href="reg.jsp?year=<%=year%>&month=<%=month + 1%>&param=<%=dat%>&regDate=<%=year+Integer.toString(month+1)+dat%>" onClick="return regChk()">
 					<img src="plus.png" style="width: 80px; margin: auto;">
 				</a>
 			</td>
 		</tr>	
-	</table>
+	</table> --%>
 	
-	<table id="table_1" class="table table-striped" border="1">
+	<table id="calMove" class="table table-striped" border="1">
 		<thead>
 			<tr>
 			<!--  
@@ -239,7 +203,7 @@
 		</thead>
 	</table>
 	<br>
-	<table id="table_2" class="table table-striped" border="1">
+	<table id="calMain" class="table table-striped" border="1">
 		<thead>
 			<tr>
 				<th style="color: red; font-size: 20px; font-style: italic;">Sun</th>
@@ -298,7 +262,7 @@
 							}
 						}	// while end
 				%>
-					<td valign="top" align="center" id="sat" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>'">
+					<td valign="top" align="center" id="sat" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
 						<br><%= day %><br>
 						<span id="addMon"><%= addMon %></span><br>
 						<span id="subMon"><%= subMon %></span>
@@ -324,7 +288,7 @@
 							}
 						}	// while end
 				%>
-					<td valign="top" align="center" id="sun" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>'">
+					<td valign="top" align="center" id="sun" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
 						<br><%= day %><br>
 						<span id="addMon"><%= addMon %></span><br>
 						<span id="subMon"><%= subMon %></span>
@@ -351,7 +315,7 @@
 							}
 						}	// while end
 				%>
-					<td valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>'">
+					<td valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
 						<br><%= day %><br>
 						<span id="addMon"><%= addMon %></span><br>
 						<span id="subMon"><%= subMon %></span>
@@ -388,6 +352,12 @@
 			</tr>
 		</tbody>
 	</table>
+</div>
+<div class="right">
+	<jsp:include page="reg.jsp" />
+	<br><br>
+	<jsp:include page="tradeInfo.jsp" />
+</div>
 <script>
 	$(document).ready(function(){
 		$("#btn_test").on("click", function(e){

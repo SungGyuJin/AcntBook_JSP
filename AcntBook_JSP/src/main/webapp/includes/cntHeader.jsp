@@ -123,21 +123,10 @@ Calendar ca = Calendar.getInstance();
 		<td id="input"><input style="font-size: 40px;"  type="text" name="rst" id="rst" value="0" readonly>원&nbsp;</td>
 	</tr>
 </table>
-<input type="text" value="0" onKeyup="numberWithCommas(num);" />
 
-<h1> * input </h1>
-<input type="text" value="<%= Integer.parseInt(list.get(1)) %>" maxlength="10" load="inputNumberFormat(this);" placeholder="input 숫자만" readonly="readonly"/>
-<!-- https://chobopark.tistory.com/175 -->
-<h1> * div </h1>
-<span id="money">60000</span><span>원</span>
-
-
-	<% int num = 1312312; %>
 <br>
 <br>
 <br>
-<input type="text" inputmode="numeric">
-
 <script>
 
 	var addmoney = document.querySelector("#add");
@@ -147,41 +136,6 @@ Calendar ca = Calendar.getInstance();
 	rst.value = parseInt(addmoney.value) - parseInt(submoney.value);
 	
 	
-	function numberWithCommas(num) {
-		
-		var regexp = /\B(?=(\d{3})+(?!\d))/g;
-		
-	    return num.toString().replace(regexp, ",");
-	}
-	
-	function comma(str) {
-        str = String(str);
-        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-    }
-
-    function uncomma(str) {
-        str = String(str);
-        return str.replace(/[^\d]+/g, '');
-    } 
-    
-    function inputNumberFormat(obj) {
-        obj.value = comma(uncomma(obj.value));
-    }
-    
-    function inputOnlyNumberFormat(obj) {
-        obj.value = onlynumber(uncomma(obj.value));
-    }
-    
-    function onlynumber(str) {
-	    str = String(str);
-	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1');
-	}
-    
-    $(document).on('keyup','input[inputmode=numeric]',function(event){
-    	this.value = this.value.replace(/[^0-9]/g,'');   // 입력값이 숫자가 아니면 공백
-    	this.value = this.value.replace(/,/g,'');          // ,값 공백처리
-    	this.value = this.value.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 정규식을 이용해서 3자리 마다 , 추가 	
-    }); 
 
 	
 </script>

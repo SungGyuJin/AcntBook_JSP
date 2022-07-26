@@ -4,7 +4,6 @@
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="includes/header.jsp"%>
 <%
 	String sql = "Select max(regNum)+1 max From acntAdd";
 	Connection con = DBcon.getConnection();
@@ -39,18 +38,18 @@
 	String month = request.getParameter("month");
 	String dat = request.getParameter("param");
 
-	out.print(regNum+"<br>");
-	out.print(regDate+"<br>");
-	out.print(year+"<br>");
-	out.print(month+"<br>");
-	out.print(dat+"<br>");
+	out.print("regNum: " + regNum+"<br>");
+	out.print("regDate: " + regDate+"<br>");
+	out.print("year: " + year+"<br>");
+	out.print("month: " + month+"<br>");
+	out.print("dat: " + dat+"<br>");
 %>
 <form action="Addmoney" method="post">
 <div id="div_1">
 	<input type="text" class="input" name="regNum" value="<%= regNum %>" readonly>
 	<input type="text" class="input" name="regDate" value="<%= regDate %>" readonly>
 	<input type="text" class="input" name="year" value="<%= year %>" readonly>
-	<input type="text" class="input" name="month" value="<%= month %>" readonly>
+	<input type="text" class="input" name="month" value="<%= Integer.parseInt(month) + 1 %>" readonly>
 	<input type="text" class="input" name="dat" value="<%= dat %>" readonly>
 </div>
 	<table border="1">
