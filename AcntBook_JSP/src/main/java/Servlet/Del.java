@@ -24,6 +24,7 @@ public class Del extends HttpServlet {
 		String month = request.getParameter("month");
 		String dat = request.getParameter("dat");
 		String[] chks = request.getParameterValues("chkItem");
+		String regDate = request.getParameter("regDate");
 		String sql = "Delete From acntAdd Where regNum= ?";
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -36,12 +37,13 @@ public class Del extends HttpServlet {
 				pstmt.setString(1, chks[i]);
 				pstmt.executeUpdate();
 			}
+			System.out.println("삭제개수" + chks.length);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println("삭제 서블릿 실행완료");
-		response.sendRedirect("mainAddAcnt.jsp?year="+year+"&month="+month+"&param="+dat+"");
+		response.sendRedirect("mainAddAcnt.jsp?year="+year+"&month="+month+"&param="+dat+"&regDate="+regDate+"");
 	}
 
 }

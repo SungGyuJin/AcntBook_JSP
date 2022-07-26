@@ -65,10 +65,11 @@
 	out.println(dateParam); */
 %>
 <form action="Del" method="post">
-	<<input type="text" name="year" value="<%= yearParam%>">
-	<input type="text" name="month" value="<%= monthParam%>">
-	<input type="text" name="dat" value="<%= dateParam%>">
-		<table id="tradeInfo" class="table table-dark" align="center">
+	<input type="hidden" name="year" value="<%= yearParam%>">
+	<input type="hidden" name="month" value="<%= monthParam%>">
+	<input type="hidden" name="dat" value="<%= dateParam%>">
+	<input type="text" name="regDate" value="<%= year+Integer.toString(month+1)+dateParam%>">
+		<table id="tradeInfo" class="table table-dark">
 			<tr>
 				<td class="td" colspan="4">
 					<h2><%= yearParam %>년&nbsp;<%= Integer.parseInt(monthParam)+1 %>월&nbsp;<%= dateParam %>일</h2>
@@ -101,7 +102,9 @@
 				
 		%>
 				<tr>
-					<td class="td" ><input type="checkbox" id="input_chk" name="chkItem" value="<%= rs.getString("regNum") %>"></td>
+					<td class="td" >
+						<input type="checkbox" id="input_chk" name="chkItem" value="<%= rs.getString("regNum") %>">
+					</td>
 		<% 
 					if(kind.equals("➕")){
 		%>		
@@ -117,7 +120,7 @@
 					<td class="td" ><%= rs.getString("price") %>원</td>
 				</tr>
 		<%
-			}
+			} // end while
 
 				if(list.size() == 0){
 		%>
@@ -141,20 +144,26 @@
 		</table>
 </form>
 <script>
-
+	
+	var itemChk = false;
+	var chkItem = document.getElementsByName("chkItem");
+	
 	function delChk(){
-		
-		if($("#input_chk").is(":checked") == false){
+	
+		for(var i = 0; i < chkItem.length; i++){
+			if(chkItem[i].checked == true){
+				itemChk = true;
+				break;
+			}
 			
-			alert("삭제 할 항목을 체크해주세요.");
+		}
+		
+		if(!itemChk){
+			alert("삭제할 항목을 선택해주세요.");
 			return false;
-		}else{
-			alert("삭제되었습니다.");
-			return true;
 		}
 	}
-	
-	
+
 	
 	
 </script>

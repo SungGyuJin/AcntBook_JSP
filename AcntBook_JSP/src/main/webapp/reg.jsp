@@ -21,6 +21,9 @@
 		border: none;
 		font-size: 0;
 	}
+	.regBox{
+		float: left;
+	}
 </style>
 </head>
 <body>
@@ -46,13 +49,16 @@
 %>
 <form action="Addmoney" method="post">
 <div id="div_1">
-	<input type="text" class="input" name="regNum" value="<%= regNum %>" readonly>
-	<input type="text" class="input" name="regDate" value="<%= regDate %>" readonly>
-	<input type="text" class="input" name="year" value="<%= year %>" readonly>
-	<input type="text" class="input" name="month" value="<%= Integer.parseInt(month) + 1 %>" readonly>
-	<input type="text" class="input" name="dat" value="<%= dat %>" readonly>
+	<input type="hidden" class="input" name="regNum" value="<%= regNum %>" readonly>
+	<input type="hidden" class="input" name="regDate" value="<%= regDate %>" readonly>
+	<input type="hidden" class="input" name="year" value="<%= year %>" readonly>
+	<input type="hidden" class="input" name="month" value="<%= Integer.parseInt(month) + 1 %>" readonly>
+	<input type="hidden" class="input" name="dat" value="<%= dat %>" readonly>
 </div>
-	<table border="1">
+	<table class="table table-dark" border="1">
+		<tr>
+			
+		</tr>
 		<tr>
 			<td>내용</td>
 			<td><input type="text" name="item" id="item"></td>
@@ -62,8 +68,10 @@
 			<td><input type="text" name="price" id="price"></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center">
+			<td align="center">
 				<input type="submit" name="kind" value="수입" onClick="return chkReg('a')">
+			</td>
+			<td>
 				<input type="submit" name="kind" value="지출" onClick="return chkReg('b')">
 			</td>
 		</tr>

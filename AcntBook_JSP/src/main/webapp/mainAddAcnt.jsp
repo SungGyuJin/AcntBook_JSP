@@ -22,6 +22,10 @@
 	
 	int year = ca.get(Calendar.YEAR);	 
 	int month = ca.get(Calendar.MONTH);
+	
+	int thatYear = ca.get(Calendar.YEAR);
+	int thatMonth = ca.get(Calendar.MONTH);
+	
 	if(strYear != null){
 		year = Integer.parseInt(strYear);
 	}
@@ -76,7 +80,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>_acnt</title>
+<title>Acnt</title>
 <style>
 	#calMove{
 		margin: auto;
@@ -161,7 +165,6 @@
 	div.left{
 		width:50%;
 		float: left;
-		background: black;
 	}
 	div.right{
 		width: 50%;
@@ -183,7 +186,7 @@
 		</tr>	
 	</table> --%>
 	
-	<table id="calMove" class="table table-striped" border="1">
+	<table id="calMove" class="table table-striped">
 		<thead>
 			<tr>
 			<!--  
@@ -194,11 +197,11 @@
 				<td style="background-color: rgb(238, 130, 238);"><a href="mainAddAcnt.jsp?&year=<%=year + 1%>">▶</a></td>
 			-->
 			
-				<td><a href="mainAddAcnt.jsp?&year=<%=year - 1%>">◀</a></td>
+				<td><a href="mainAddAcnt.jsp?&year=<%=year - 1%>&month=<%=month%>">◀</a></td>
 				<td><a style="color: black; font-style: italic;" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month - 1%>">이전달</a></td>
-				<td><a style="color: black; font-style: italic; font-size: 20px;" href="mainAddAcnt.jsp?&param=<%=today%>"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
+				<td><a style="color: black; font-style: italic; font-size: 20px;" href="mainAddAcnt.jsp?year=<%= thatYear %>&month=<%= thatMonth %>&param=<%= today%>&regDate=<%=year+Integer.toString(month+1)+today %>"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
 				<td><a style="color: black; font-style: italic;" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month + 1%>">다음달</a></td>
-				<td><a href="mainAddAcnt.jsp?&year=<%=year + 1%>">▶</a></td>
+				<td><a href="mainAddAcnt.jsp?&year=<%=year + 1%>&month=<%=month%>">▶</a></td>
 		 </tr>
 		</thead>
 	</table>
@@ -346,8 +349,6 @@
 							out.print("<td id='nextMonthDate'>"+i+"</td>");
 						}
 					}
-					
-					out.print("막날"+lastDate);
 				%>
 			</tr>
 		</tbody>

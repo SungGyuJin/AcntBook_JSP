@@ -58,12 +58,7 @@ public class Addmoney extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		response.setContentType("text/html; charset=UTF-8");
-		String url = "mainAddAcnt.jsp?year="+year+"&month="+(Integer.parseInt(month)-1)+"&param="+dat;
-		PrintWriter wt = response.getWriter();
-		wt.print("<script>"
-				+ "location.href = '" + url + "';"
-			   + "</script>");
-		wt.close();
+		response.sendRedirect("mainAddAcnt.jsp?year="+year+"&month="+(Integer.parseInt(month)-1)+"&param="+dat+"&regDate="+regDate+"");
+
 	}
 }
