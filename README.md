@@ -11,8 +11,3 @@
 2. 거래내역 조회
 * 달력으로 한눈에 볼 수 있도록 설계
 
-test
-<img src="https://user-images.githubusercontent.com/79797179/181237015-9ba7a1ed-72e8-4ab5-913c-a1a5b77b4134.gif" width="50%">
-<img src="https://user-images.githubusercontent.com/79797179/181241218-e5e172f6-e7a8-47b7-8caf-93045c4b0fbf.gif" width="50%">
-
-
