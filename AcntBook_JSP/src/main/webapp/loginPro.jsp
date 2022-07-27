@@ -13,7 +13,7 @@
 </head>
 <body>
 <%
-Calendar ca = Calendar.getInstance();
+	Calendar ca = Calendar.getInstance();
 	
 	int year = ca.get(Calendar.YEAR);
 	int month = ca.get(Calendar.MONTH);
@@ -38,7 +38,7 @@ Calendar ca = Calendar.getInstance();
 		session.setAttribute("id", id);
 		out.println("<script>");
 		out.println("alert('로그인성공!!');");
-		out.println("location.href='mainAddAcnt.jsp?year="+year+"&month="+month+"&param="+today+"'");
+		out.println("location.href='mainAddAcnt.jsp?year="+year+"&month="+month+"&param="+today+"&regDate="+year+Integer.toString(month+1)+today+"'");
 		out.println("</script>");
 	}
 		}

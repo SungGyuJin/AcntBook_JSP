@@ -44,7 +44,7 @@
 	out.print("regNum: " + regNum+"<br>");
 	out.print("regDate: " + regDate+"<br>");
 	out.print("year: " + year+"<br>");
-	out.print("month: " + month+"<br>");
+	out.print("month: " + (month)+"<br>");
 	out.print("dat: " + dat+"<br>");
 %>
 <form action="Addmoney" method="post">
@@ -56,9 +56,6 @@
 	<input type="hidden" class="input" name="dat" value="<%= dat %>" readonly>
 </div>
 	<table class="table table-dark" border="1">
-		<tr>
-			
-		</tr>
 		<tr>
 			<td>내용</td>
 			<td><input type="text" name="item" id="item"></td>

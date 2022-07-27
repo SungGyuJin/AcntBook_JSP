@@ -171,7 +171,9 @@
 		float: rigth;
 		
 	}
-	
+	.mouse_hover:hover{
+		background-color: pink;
+	}
 </style>
 </head>
 <body>
@@ -189,14 +191,6 @@
 	<table id="calMove" class="table table-striped">
 		<thead>
 			<tr>
-			<!--  
-				<td style="background-color: rgb(238, 130, 238);"><a href="mainAddAcnt.jsp?&year=<%=year - 1%>">◀</a></td>
-				<td style="background-color: rgb(255, 250, 147);"><a style="color: black; font-style: italic;" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month - 1%>">이전달</a></td>
-				<td style="background-color: orange;"><a style="color: black; font-style: italic; font-size: 20px;" href="mainAddAcnt.jsp?&param=<%=today%>"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
-				<td style="background-color: rgb(255, 250, 147);"><a style="color: black; font-style: italic;" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month + 1%>">다음달</a></td>
-				<td style="background-color: rgb(238, 130, 238);"><a href="mainAddAcnt.jsp?&year=<%=year + 1%>">▶</a></td>
-			-->
-			
 				<td><a href="mainAddAcnt.jsp?&year=<%=year - 1%>&month=<%=month%>">◀</a></td>
 				<td><a style="color: black; font-style: italic;" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month - 1%>">이전달</a></td>
 				<td><a style="color: black; font-style: italic; font-size: 20px;" href="mainAddAcnt.jsp?year=<%= thatYear %>&month=<%= thatMonth %>&param=<%= today%>&regDate=<%=year+Integer.toString(month+1)+today %>"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
@@ -265,7 +259,7 @@
 							}
 						}	// while end
 				%>
-					<td valign="top" align="center" id="sat" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+					<td class="mouse_hover" valign="top" align="center" id="sat" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
 						<br><%= day %><br>
 						<span id="addMon"><%= addMon %></span><br>
 						<span id="subMon"><%= subMon %></span>
@@ -291,7 +285,7 @@
 							}
 						}	// while end
 				%>
-					<td valign="top" align="center" id="sun" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+					<td class="mouse_hover" valign="top" align="center" id="sun" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
 						<br><%= day %><br>
 						<span id="addMon"><%= addMon %></span><br>
 						<span id="subMon"><%= subMon %></span>
@@ -318,7 +312,7 @@
 							}
 						}	// while end
 				%>
-					<td valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+					<td class="mouse_hover" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
 						<br><%= day %><br>
 						<span id="addMon"><%= addMon %></span><br>
 						<span id="subMon"><%= subMon %></span>
@@ -334,19 +328,19 @@
 					/* 그 달의 날짜가 다 입력된 후 남은 공백입력 */
 					if(count == 28 || count == 35){
 						for(int i = 1; i <= 7; i++){
-							out.print("<td id='nextMonthDate'>"+i+"</td>");
+							out.print("<td id='nextMonthDate'><br>"+i+"</td>");
 						}
 					}
 					if(count > 28 && count < 35){
 						int sub = 35 - count;
 						for(int i = 1; i <= sub; i++){
-							out.print("<td id='nextMonthDate'>"+i+"</td>");
+							out.print("<td id='nextMonthDate'><br>"+i+"</td>");
 						}
 					}
 					if(count > 35){
 						int sub = 42 - count;
 						for(int i = 1; i <= sub; i++){
-							out.print("<td id='nextMonthDate'>"+i+"</td>");
+							out.print("<td id='nextMonthDate'><br>"+i+"</td>");
 						}
 					}
 				%>
