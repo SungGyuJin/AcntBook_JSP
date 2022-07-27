@@ -12,7 +12,7 @@
 * 달력으로 한눈에 볼 수 있도록 설계
 
 test
-<img src="https://github.com/SungGyuJin/AcntBook_JSP/issues/1#issue-1319427942">
+<img src="[https://github.com/SungGyuJin/AcntBook_JSP/issues/1#issue-1319427942](https://user-images.githubusercontent.com/79797179/181237015-9ba7a1ed-72e8-4ab5-913c-a1a5b77b4134.gif)">
 
 
 
