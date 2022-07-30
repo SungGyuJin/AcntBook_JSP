@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="Dao.DBcon"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
@@ -89,6 +90,11 @@
 		width: 100%;
 		background-color: white;
 	}
+	#calMove_font{
+		color: black;
+		font-style: italic;
+		font-size: 35px;
+	}
 	#calMain{
 		width: 100%;
 		height: 100%;
@@ -131,7 +137,7 @@
 		height: 140px;
 	}
 	#nextMonthDate{
-		font-size: 20px;
+		font-size: 35px;
 		font-style: italic;
 		color: grey;
 		width: 100px;
@@ -151,10 +157,12 @@
 	#addMon{
 		color: #00CCCC;
 		font-weight: bold;
+		font-size: x-large;
 	}
 	#subMon{
 		color: #FF6699;
 		font-weight: bold;
+		font-size: x-large;
 	}
 	
 	/* div 화면 등분*/
@@ -169,10 +177,12 @@
 	div.right{
 		width: 50%;
 		float: rigth;
-		
 	}
 	.mouse_hover:hover{
 		background-color: pink;
+	}
+	.day_text{
+		font-size: 35px;
 	}
 </style>
 </head>
@@ -187,15 +197,14 @@
 			</td>
 		</tr>	
 	</table> --%>
-	
 	<table id="calMove" class="table table-striped">
 		<thead>
 			<tr>
-				<td><a href="mainAddAcnt.jsp?&year=<%=year - 1%>&month=<%=month%>">◀</a></td>
-				<td><a style="color: black; font-style: italic;" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month - 1%>">이전달</a></td>
-				<td><a style="color: black; font-style: italic; font-size: 20px;" href="mainAddAcnt.jsp?year=<%= thatYear %>&month=<%= thatMonth %>&param=<%= today%>&regDate=<%=year+Integer.toString(month+1)+today %>"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
-				<td><a style="color: black; font-style: italic;" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month + 1%>">다음달</a></td>
-				<td><a href="mainAddAcnt.jsp?&year=<%=year + 1%>&month=<%=month%>">▶</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year - 1%>&month=<%=month%>">◀</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month - 1%>">이전달</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%= thatYear %>&month=<%= thatMonth %>&param=<%= today%>&regDate=<%=year+Integer.toString(month+1)+today %>"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month + 1%>">다음달</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year + 1%>&month=<%=month%>">▶</a></td>
 		 </tr>
 		</thead>
 	</table>
@@ -215,6 +224,11 @@
 		<tbody>
 			<tr>
 				<%
+				DecimalFormat df = new DecimalFormat("###,###");
+				
+				int addComma = 0;
+				int subComma = 0;
+				
 				// 1일 시작 날짜 and 1 2 3 4 ... 31 테이블 하나당 날짜찍기
 				// 한 주의 토요일이 끝나면 개행
 				
@@ -244,25 +258,26 @@
 					ResultSet rs = stmt.executeQuery(sql);
 						while(rs.next()){
 							if(regData.equals(rs.getString("regDate"))){
+								
 								list.add(rs.getString("kind"));
 								list.add(rs.getString("price"));
 								if(list.size() == 4){
-									addMon = list.get(1);
-									subMon = list.get(3);
-								}else if(list.get(0).equals("-")){
+									addMon = df.format(Integer.parseInt(list.get(1)));
+									subMon = df.format(Integer.parseInt(list.get(3)));
+								}else if(list.get(0).equals("-")){ // 지출만 등록된 경우
 									addMon = "";
-									subMon = list.get(1);
-								}else{
-									addMon = list.get(1);
+									subMon = df.format(Integer.parseInt(list.get(1)));
+								}else{ // 수입만 등록된 경우
+									addMon = df.format(Integer.parseInt(list.get(1)));
 									subMon = "";
 								}
 							}
 						}	// while end
 				%>
 					<td class="mouse_hover" valign="top" align="center" id="sat" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
-						<br><%= day %><br>
+						<br><span class="day_text"><%= day %></span><br>
 						<span id="addMon"><%= addMon %></span><br>
-						<span id="subMon"><%= subMon %></span>
+						<span id="subMon"><%= subMon %></span><br>
 					</td>
 				<%		
 					// 일요일
@@ -273,22 +288,22 @@
 								list.add(rs.getString("kind"));
 								list.add(rs.getString("price"));
 								if(list.size() == 4){
-									addMon = list.get(1);
-									subMon = list.get(3);
-								}else if(list.get(0).equals("-")){
+									addMon = df.format(Integer.parseInt(list.get(1)));
+									subMon = df.format(Integer.parseInt(list.get(3)));
+								}else if(list.get(0).equals("-")){ // 지출만 등록된 경우
 									addMon = "";
-									subMon = list.get(1);
-								}else{
-									addMon = list.get(1);
+									subMon = df.format(Integer.parseInt(list.get(1)));
+								}else{ // 수입만 등록된 경우
+									addMon = df.format(Integer.parseInt(list.get(1)));
 									subMon = "";
 								}
 							}
 						}	// while end
 				%>
 					<td class="mouse_hover" valign="top" align="center" id="sun" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
-						<br><%= day %><br>
+						<br><span class="day_text"><%= day %></span><br>
 						<span id="addMon"><%= addMon %></span><br>
-						<span id="subMon"><%= subMon %></span>
+						<span id="subMon"><%= subMon %></span><br>
 					</td>
 				<%
 					// 평일
@@ -300,22 +315,22 @@
 								list.add(rs.getString("kind"));
 								list.add(rs.getString("price"));
 								if(list.size() == 4){
-									addMon = list.get(1);
-									subMon = list.get(3);
-								}else if(list.get(0).equals("-")){
+									addMon = df.format(Integer.parseInt(list.get(1)));
+									subMon = df.format(Integer.parseInt(list.get(3)));
+								}else if(list.get(0).equals("-")){ // 지출만 등록된 경우
 									addMon = "";
-									subMon = list.get(1);
-								}else{
-									addMon = list.get(1);
+									subMon = df.format(Integer.parseInt(list.get(1)));
+								}else{ // 수입만 등록된 경우
+									addMon = df.format(Integer.parseInt(list.get(1)));
 									subMon = "";
 								}
 							}
 						}	// while end
 				%>
 					<td class="mouse_hover" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
-						<br><%= day %><br>
+						<br><span class="day_text"><%= day %></span><br>
 						<span id="addMon"><%= addMon %></span><br>
-						<span id="subMon"><%= subMon %></span>
+						<span id="subMon"><%= subMon %></span><br>
 					</td>
 				<%			
 					}

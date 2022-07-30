@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="Dao.DBcon"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.ArrayList"%>
@@ -28,12 +29,18 @@ Calendar ca = Calendar.getInstance();
 	Statement stmt = conn.createStatement();
 	ResultSet rs = stmt.executeQuery(sql);
 	
+	DecimalFormat df = new DecimalFormat("###,###");
+	
+	String kind = "";
+	String price = "";
+	
 	ArrayList<String> list = new ArrayList<>();
 	
 	while(rs.next()){
 		list.add(rs.getString("kind"));
 		list.add(rs.getString("price"));
 	}
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -48,7 +55,7 @@ Calendar ca = Calendar.getInstance();
 		margin: auto;
 	}
 	#add{
-		width: 200px;
+		width: 50%;
 		font-size: xx-large;
 		text-align: right;
 		font-style: normal;
@@ -56,14 +63,14 @@ Calendar ca = Calendar.getInstance();
 		font-style: italic;
 	}
 	#sub{
-		width: 200px;
+		width: 50%;
 		font-size: xx-large;
 		text-align: right;
 		font-style: italic;
 		border: none;
 	}
-	#rst{
-		width: 200px;
+	#total_result{
+		width: 50%;
 		font-size: xx-large;
 		text-align: right;
 		font-style: italic;
@@ -86,31 +93,44 @@ Calendar ca = Calendar.getInstance();
 <table class="table table-dark" id="fm">
 	<tr>
 	<%
+		int total_income = 0;
+		int total_expense = 0;
+		int total_result = 0;
+		
 		if(list.size() == 4){
 	%>
 			<td id="td">&nbsp;&nbsp;전체수입&nbsp;&nbsp;</td>
-			<td id="input"><input style="font-size: 40px;" type="text" name="add" id="add" value="<%= list.get(1) %>" readonly>원&nbsp;</td>
+			<td id="input"><input style="font-size: 40px;" type="text" name="add" id="add" value="<%= df.format(Integer.parseInt(list.get(1))) %>" readonly>원&nbsp;</td>
 			<td id="td">&nbsp;&nbsp;전체지출&nbsp;&nbsp;</td>
-			<td id="input"><input style="font-size: 40px;"  type="text" name="sub" id="sub" value="<%= list.get(3) %>" readonly>원&nbsp;</td>
-	<%		
+			<td id="input"><input style="font-size: 40px;"  type="text" name="sub" id="sub" value="<%= df.format(Integer.parseInt(list.get(3))) %>" readonly>원&nbsp;</td>
+	<%	
+			total_income = Integer.parseInt(list.get(1));
+			total_expense = Integer.parseInt(list.get(3));
+			total_result = total_income - total_expense;
 		}else if(list.size() == 2){
-			
-			if(list.get(0).equals("+")){
+			out.print("<h1>리스트 사이즈 : " + list.size() + "</h1>");
+			if(list.get(0).equals("+")){ // 수입만 등록되어 있을때
 	%>
 				<td id="id">&nbsp;&nbsp;전체수입&nbsp;&nbsp;</td>
-				<td id="input"><input style="font-size: 40px;"  type="text" name="add" id="add" value="<%= list.get(1) %> " readonly>원&nbsp;</td>
+				<td id="input"><input style="font-size: 40px;"  type="text" name="add" id="add" value="<%= df.format(Integer.parseInt(list.get(1))) %> " readonly>원&nbsp;</td>
 				<td id="id">&nbsp;&nbsp;전체지출&nbsp;&nbsp;</td>
 				<td id="input"><input style="font-size: 40px;"  type="text" name="sub" id="sub" value="0" readonly>원&nbsp;</td>
 	<%
-			}else{
-	%>
+				total_income = Integer.parseInt(list.get(1));
+				total_expense = 0;
+				total_result = total_income - total_expense;
+			}else{ // 지출만 들록되어 있을때
+	%>		
 				<td id="td">&nbsp;&nbsp;전체수입&nbsp;&nbsp;</td>
 				<td id="input"><input style="font-size: 40px;"  type="text" name="add" id="add" value="0" readonly>원&nbsp;</td>
 				<td id="td">&nbsp;&nbsp;전체지출&nbsp;&nbsp;</td>
-				<td id="input"><input style="font-size: 40px;"  type="text" name="sub" id="sub" value="<%= list.get(1) %>" readonly>원&nbsp;</td>
-	<%			
+				<td id="input"><input style="font-size: 40px;"  type="text" name="sub" id="sub" value="<%= df.format(Integer.parseInt(list.get(1))) %>" readonly>원&nbsp;</td>
+	<%	
+				total_income = 0;
+				total_expense = Integer.parseInt(list.get(1));
+				total_result = total_income - total_expense;
 			}
-		}else {
+		}else { // 수입, 지출 어느 것도 등록이 안되어 있을때
 	%>
 			<td id="td">&nbsp;&nbsp;전체수입&nbsp;&nbsp;</td>
 			<td id="input"><input style="font-size: 40px;"  type="text" name="add" id="add" value="0" readonly>원&nbsp;</td>
@@ -120,24 +140,11 @@ Calendar ca = Calendar.getInstance();
 		}
 	%>
 		<td id="td">&nbsp;&nbsp;잔액&nbsp;&nbsp;&nbsp;</td>
-		<td id="input"><input style="font-size: 40px;"  type="text" name="rst" id="rst" value="0" readonly>원&nbsp;</td>
+		<td id="input"><input style="font-size: 40px;"  type="text" name="total_result" id="total_result" value="<%= df.format(total_result) %>" readonly>원&nbsp;</td>
 	</tr>
 </table>
-
 <br>
 <br>
 <br>
-<script>
-
-	var addmoney = document.querySelector("#add");
-	var submoney = document.querySelector("#sub");
-	var rst = document.querySelector("#rst");
-	
-	rst.value = parseInt(addmoney.value) - parseInt(submoney.value);
-	
-	
-
-	
-</script>
 </body>
 </html>

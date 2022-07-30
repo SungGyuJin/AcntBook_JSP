@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
@@ -47,14 +48,24 @@
 		background-color: #00CCCC;
 	}
 	#subKind{
-		background-color: pink;
+		background-color: #FF6699;
 	}
 	#btn_del{
 		width: 100%;
+		font-size: 40px;
 	}
 	#input_chk{
-		width: 30px;
-		height: 30px;
+		margin-top: 10px;	
+		width: 40px;
+		height: 40px;
+	}
+	.title_date{
+		font-size: 40px;
+		font-style: italic;
+	}
+	.th_font{
+		font-size: 35px;
+		font-style: italic;
 	}
 </style>
 </head>
@@ -68,27 +79,33 @@
 	<input type="hidden" name="year" value="<%= yearParam%>">
 	<input type="hidden" name="month" value="<%= monthParam%>">
 	<input type="hidden" name="dat" value="<%= dateParam%>">
-	<input type="text" name="regDate" value="<%= year+Integer.toString(month+1)+dateParam%>">
+	<input type="hidden" name="regDate" value="<%= year+Integer.toString(month+1)+dateParam%>">
 		<table id="tradeInfo" class="table table-dark">
 			<tr>
 				<td class="td" colspan="4">
-					<h2><%= yearParam %>년&nbsp;<%= Integer.parseInt(monthParam)+1 %>월&nbsp;<%= dateParam %>일</h2>
+					<span class="title_date"><%= yearParam %>년&nbsp;&nbsp;<%= Integer.parseInt(monthParam)+1 %>월&nbsp;&nbsp;<%= dateParam %>일</span>
 				</td>
 			</tr>
 			<tr>
-				<th>선택</th>
-				<th>구분</th>
-				<th>내용</th>	
-				<th>금액</th>
+				<th class="th_font">선택</th>
+				<th class="th_font">구분</th>
+				<th class="th_font">내용</th>	
+				<th class="th_font">금액</th>
 			</tr>
 		<%
 				String kind = "";
 				String addKind = "";
 				String subKind = "";
 
+				DecimalFormat df = new DecimalFormat("###,###");
+				
+				String price = "";
+				
 				ArrayList<String> list = new ArrayList<>();
 				
 			while(rs.next()){
+				
+				price = df.format(Integer.parseInt(rs.getString("price")));
 				
 				if(rs.getString("kind").equals("+")){
 					kind = "➕";
@@ -117,11 +134,12 @@
 					}
 		%>
 					<td class="td" ><%= rs.getString("item") %></td>
-					<td class="td" ><%= rs.getString("price") %>원</td>
+					<td class="td" ><%= price %>원</td>
 				</tr>
 		<%
 			} // end while
 
+			
 				if(list.size() == 0){
 		%>
 				<tr>
