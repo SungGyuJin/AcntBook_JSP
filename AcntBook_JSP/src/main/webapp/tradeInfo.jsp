@@ -46,9 +46,11 @@
 	}
 	#addKind{
 		background-color: #00CCCC;
+		border-radius: 3px;
 	}
 	#subKind{
 		background-color: #FF6699;
+		border-radius: 3px;
 	}
 	#btn_del{
 		width: 100%;
@@ -119,17 +121,17 @@
 				
 		%>
 				<tr>
-					<td class="td" >
+					<td class="td">
 						<input type="checkbox" id="input_chk" name="chkItem" value="<%= rs.getString("regNum") %>">
 					</td>
 		<% 
 					if(kind.equals("➕")){
-		%>		
-					<td class="td" id="addKind"><%= addKind %></td>
+		%>			
+					<td  width="100px" nowrap class="td" id="addKind"><%= addKind %></td>
 		<%
 					}else{
 		%>
-					<td class="td" id="subKind"><%= subKind %></td>
+					<td width="100px" nowrap class="td" id="subKind"><%= subKind %></td>
 		<%
 					}
 		%>
@@ -153,7 +155,7 @@
 		%>
 			<tr>
 				<td colspan="4" align="center">
-					<input type="submit" id="btn_del" value="삭제" onClick="return delChk()">
+					<input type="submit" id="btn_del" value="삭제" style="border-radius: 20px;">
 				</td>
 			</tr>
 		<%
@@ -166,7 +168,7 @@
 	var itemChk = false;
 	var chkItem = document.getElementsByName("chkItem");
 	
-	function delChk(){
+	/* function delChk(){
 	
 		for(var i = 0; i < chkItem.length; i++){
 			if(chkItem[i].checked == true){
@@ -180,7 +182,7 @@
 			alert("삭제할 항목을 선택해주세요.");
 			return false;
 		}
-	}
+	} */
 
 	
 	

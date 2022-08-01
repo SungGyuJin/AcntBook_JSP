@@ -7,7 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.Calendar"%>
-<%@include file="includes/header.jsp"%>
+<%-- <%@include file="includes/header.jsp"%> --%>
 <jsp:include page="includes/cntHeader.jsp" />
 
 <%
@@ -84,6 +84,7 @@
 <title>Acnt</title>
 <style>
 	#calMove{
+		table-layout: fixed;
 		margin: auto;
 		text-align: center;
 		font-size: x-large;
@@ -93,9 +94,10 @@
 	#calMove_font{
 		color: black;
 		font-style: italic;
-		font-size: 35px;
+		font-size: 50px;
 	}
 	#calMain{
+		table-layout: fixed;
 		width: 100%;
 		height: 100%;
 		text-align: center;
@@ -178,8 +180,12 @@
 		width: 50%;
 		float: rigth;
 	}
+	.mouse_hover{
+		cursor: pointer;
+	}
+	
 	.mouse_hover:hover{
-		background-color: pink;
+		background-color: #AFEEEE;
 	}
 	.day_text{
 		font-size: 35px;
@@ -200,11 +206,11 @@
 	<table id="calMove" class="table table-striped">
 		<thead>
 			<tr>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year - 1%>&month=<%=month%>">◀</a></td>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month - 1%>">이전달</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year - 1%>&month=<%=month%>">◀◀</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month - 1%>">◀</a></td>
 				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%= thatYear %>&month=<%= thatMonth %>&param=<%= today%>&regDate=<%=year+Integer.toString(month+1)+today %>"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month + 1%>">다음달</a></td>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year + 1%>&month=<%=month%>">▶</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month + 1%>">▶</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year + 1%>&month=<%=month%>">▶▶</a></td>
 		 </tr>
 		</thead>
 	</table>
@@ -274,7 +280,7 @@
 							}
 						}	// while end
 				%>
-					<td class="mouse_hover" valign="top" align="center" id="sat" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+					<td width="100px" nowrap class="mouse_hover" valign="top" align="center" id="sat" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
 						<br><span class="day_text"><%= day %></span><br>
 						<span id="addMon"><%= addMon %></span><br>
 						<span id="subMon"><%= subMon %></span><br>
@@ -369,11 +375,6 @@
 	<jsp:include page="tradeInfo.jsp" />
 </div>
 <script>
-	$(document).ready(function(){
-		$("#btn_test").on("click", function(e){
-			alert("ㅎㅇㅎㅇㅇㅇ");
-		});
-	});
 	
 
 

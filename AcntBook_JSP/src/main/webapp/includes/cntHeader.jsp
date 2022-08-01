@@ -87,10 +87,14 @@ Calendar ca = Calendar.getInstance();
 		text-align: left;
 	}
 </style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <table class="table table-dark" id="fm">
+	<tr>
+		<td colspan="6"><span style="font-size: 50px;"><%= Integer.parseInt(month) + 1%>월 전체내역</span></td>
+	</tr>
 	<tr>
 	<%
 		int total_income = 0;
@@ -143,8 +147,6 @@ Calendar ca = Calendar.getInstance();
 		<td id="input"><input style="font-size: 40px;"  type="text" name="total_result" id="total_result" value="<%= df.format(total_result) %>" readonly>원&nbsp;</td>
 	</tr>
 </table>
-<br>
-<br>
-<br>
+<hr>
 </body>
 </html>

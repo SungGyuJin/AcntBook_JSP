@@ -46,6 +46,7 @@
 		width: 100%;
 		font-size: 40px;
 		background: #FF6699;
+		border-radius: 20px;
 	}
 </style>
 </head>
@@ -85,7 +86,7 @@
 		</tr>
 		<tr>
 			<td>금&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;액</td>
-			<td><input type="text" class="price_input" name="price" id="price" placeholder="숫자만 입력해주세요."></td>
+			<td><input type="text" class="price_input" name="price" id="price" placeholder="금액을 입력해주세요."></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
@@ -104,19 +105,19 @@
 	var price = document.querySelector("#price");
 	function chkReg(str){
 		if(item.value == ""){
-			alert("내용 미입력!!");
+			alert("내용 미입력.");
 			item.focus();
 			return false;
 		}else if(price.value == ""){
-			alert("금액 미입력!!");
+			alert("금액 미입력.");
 			price.focus();
 			return false;
 		}
-		if(str == "a"){
-			alert("수입등록완료!!");
+		/* if(str == "a"){
+			alert("수입내역 등록완료.");
 		}else{
-			alert("지출등록완료!!");
-		}
+			alert("지출내역 등록완료.");
+		} */
 	}
 </script>
 </body>

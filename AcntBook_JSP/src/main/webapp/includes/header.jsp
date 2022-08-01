@@ -31,7 +31,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-	<h1 style="font-size: 20px; font-style: italic;" align="center">💸Save!!💰</h1><br><br>
+	<!-- <h1 style="font-size: 20px; font-style: italic;" align="center">💸Save!!💰</h1><br><br> -->
 <%
 String id = null;
 	if(session.getAttribute("id") != null){
@@ -46,7 +46,7 @@ String id = null;
 		if(rs.next()){
 	String information = rs.getString("name");
 %>
-	<h2 style="font-size: 20px;"align="center"><%= information %>님 반갑습니다 ^ o ^ ~</h2>
+	<p style="font-size: 20px;"align="center"><%= information %>님 로그인</p>
 <%
 		}
 %>
