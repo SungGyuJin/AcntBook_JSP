@@ -27,6 +27,20 @@
 	int thatYear = ca.get(Calendar.YEAR);
 	int thatMonth = ca.get(Calendar.MONTH);
 	
+	// 현재 날짜
+	int nowYear = ca.get(Calendar.DAY_OF_MONTH);
+	out.print("현재월의 날짜 : " + nowYear + "<br>");;
+	out.print("month : " + month + "<br>");
+	out.print("today : " + today + "<br>");
+	
+	String stringYear = Integer.toString(year);
+	String stringMonth = Integer.toString(month+1);
+	
+	String YMT = stringYear+stringMonth+today;
+	String YM = stringYear+stringMonth;
+	out.print(YMT + "<br>");
+	out.print(YM);
+	
 	if(strYear != null){
 		year = Integer.parseInt(strYear);
 	}
@@ -50,7 +64,8 @@
 	// 보여주고 싶은 월은 알아서 +- 하여 코드를 작성하자
 	int dayOfweek = ca.get(Calendar.DAY_OF_WEEK);
 	int lastDate = ca.getActualMaximum(Calendar.DAY_OF_MONTH);
-	
+	out.print("<br>"+dayOfweek);
+	out.print("<br>"+lastDate);
 	//if(dayOfweek == 1){d = "일";}if(dayOfweek == 2){d = "월";}
 	//if(dayOfweek == 3){d = "화";}if(dayOfweek == 4){d = "수";}
 	//if(dayOfweek == 5){d = "목";}if(dayOfweek == 6){d = "금";}
@@ -190,9 +205,18 @@
 	.day_text{
 		font-size: 35px;
 	}
+	#todayChk{
+		background: #FFA07A;
+	}
 </style>
+<script type="text/javascript">
+	window.history.forward();
+	function noBack(){
+		window.history.forward();
+	}
+</script>
 </head>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 <div class="left">
 	<%-- <table align="center">
 		<tr>
@@ -206,11 +230,11 @@
 	<table id="calMove" class="table table-striped">
 		<thead>
 			<tr>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year - 1%>&month=<%=month%>">◀◀</a></td>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month - 1%>">◀</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%=year - 1%>&month=<%=month%>">◀◀</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%=year%>&month=<%=month - 1%>">◀</a></td>
 				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%= thatYear %>&month=<%= thatMonth %>&param=<%= today%>&regDate=<%=year+Integer.toString(month+1)+today %>"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year%>&month=<%=month + 1%>">▶</a></td>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?&year=<%=year + 1%>&month=<%=month%>">▶▶</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%=year%>&month=<%=month + 1%>">▶</a></td>
+				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%=year + 1%>&month=<%=month%>">▶▶</a></td>
 		 </tr>
 		</thead>
 	</table>
@@ -250,6 +274,8 @@
 				Connection conn = DBcon.getConnection();
 				Statement stmt = conn.createStatement();
 				
+				String YMD = "";
+				
 				// 빈칸은 끝났다 이제 말일까지 날짜를 찍자
 				for(int day = 1; day <= lastDate; day++){
 					ArrayList<String> list = new ArrayList<>();
@@ -258,6 +284,7 @@
 					String addMon = "";
 					String subMon = "";
 					count++;
+					YMD = YM + Integer.toString(day);
 					
 					// 토요일
 					if(count % 7 == 0){
@@ -332,13 +359,24 @@
 								}
 							}
 						}	// while end
+						
+						if(today == day && month+1 == 8 && year == 2022){
 				%>
-					<td class="mouse_hover" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
-						<br><span class="day_text"><%= day %></span><br>
-						<span id="addMon"><%= addMon %></span><br>
-						<span id="subMon"><%= subMon %></span><br>
-					</td>
-				<%			
+						<td class="mouse_hover" style="background: #FFA07A;" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+								<br><span class="day_text"><%= day %></span><br>
+								<span id="addMon"><%= addMon %></span><br>
+								<span id="subMon"><%= subMon %></span><br>
+							</td>
+				<%
+						}else{
+				%>
+						<td class="mouse_hover" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+							<br><span class="day_text"><%= day %></span><br>
+							<span id="addMon"><%= addMon %></span><br>
+							<span id="subMon"><%= subMon %></span><br>
+						</td>
+				<%		
+						}
 					}
 						// 달력의 개행작업
 						if(count % 7 == 0){
@@ -375,9 +413,6 @@
 	<jsp:include page="tradeInfo.jsp" />
 </div>
 <script>
-	
-
-
 </script>
 </body>
 </html>

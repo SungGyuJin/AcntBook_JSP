@@ -37,7 +37,6 @@
 	if(pw.equals(rs.getString("pw"))){
 		session.setAttribute("id", id);
 		out.println("<script>");
-		out.println("alert('로그인성공!!');");
 		out.println("location.href='mainAddAcnt.jsp?year="+year+"&month="+month+"&param="+today+"&regDate="+year+Integer.toString(month+1)+today+"'");
 		out.println("</script>");
 	}

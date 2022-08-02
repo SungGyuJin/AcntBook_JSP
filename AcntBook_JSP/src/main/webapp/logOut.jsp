@@ -8,8 +8,7 @@
 </head>
 <body>
 <%
-	session.removeAttribute("id");
-	session.removeAttribute("pw");
+	session.invalidate();
 	response.sendRedirect("loginForm.jsp");
 %>
 </body>

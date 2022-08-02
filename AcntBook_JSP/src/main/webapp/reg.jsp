@@ -32,21 +32,30 @@
 	.item_input{
 		width: 70%;
 		text-align: center;
+		border-radius: 15px;
 	}
 	.price_input{
 		width: 70%;
 		text-align: center;
+		border-radius: 15px;
 	}
 	.left_btn_input{
 		width: 100%;
 		font-size: 40px;
 		background: #00CCCC;
+		border-radius: 20px;
+	}
+	.left_btn_input:hover{
+		background: #20B2AA;
 	}
 	.right_btn_input{
 		width: 100%;
 		font-size: 40px;
 		background: #FF6699;
 		border-radius: 20px;
+	}
+	.right_btn_input:hover{
+		background: #DB7093;
 	}
 </style>
 </head>
@@ -105,19 +114,12 @@
 	var price = document.querySelector("#price");
 	function chkReg(str){
 		if(item.value == ""){
-			alert("내용 미입력.");
 			item.focus();
 			return false;
 		}else if(price.value == ""){
-			alert("금액 미입력.");
 			price.focus();
 			return false;
 		}
-		/* if(str == "a"){
-			alert("수입내역 등록완료.");
-		}else{
-			alert("지출내역 등록완료.");
-		} */
 	}
 </script>
 </body>
