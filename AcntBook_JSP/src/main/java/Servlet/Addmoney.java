@@ -29,16 +29,15 @@ public class Addmoney extends HttpServlet {
 		}else {
 			kind = "-";
 		}
-		String price = request.getParameter("price");
+		String priceRemoveComma = request.getParameter("priceRemoveComma");
 		String regDate = request.getParameter("regDate");
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		String dat = request.getParameter("dat");
-		
 		String sql = "Insert Into acntAdd Values(?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-
+		
 		try {
 			conn = DBcon.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -46,7 +45,7 @@ public class Addmoney extends HttpServlet {
 			pstmt.setString(1, regNum);
 			pstmt.setString(2, item);
 			pstmt.setString(3, kind);
-			pstmt.setString(4, price);
+			pstmt.setString(4, priceRemoveComma);
 			pstmt.setString(5, regDate);
 			pstmt.setString(6, year);
 			pstmt.setString(7, month);

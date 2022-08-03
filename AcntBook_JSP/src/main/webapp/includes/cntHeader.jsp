@@ -46,7 +46,7 @@ Calendar ca = Calendar.getInstance();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>AcntBook</title>
 <style>		
 	#fm{
 		font-size: x-large;
@@ -151,6 +151,5 @@ Calendar ca = Calendar.getInstance();
 		<td id="input"><input type="text" name="total_result" id="total_result" value="<%= df.format(total_result) %>" readonly>원&nbsp;</td>
 	</tr>
 </table>
-<hr>
 </body>
 </html>

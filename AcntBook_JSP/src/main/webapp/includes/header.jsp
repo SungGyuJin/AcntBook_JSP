@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>AcntBook</title>
 <style>
 	*{
 		margin: auto;
@@ -24,11 +24,11 @@
 		font-size: 30px;
 		border: none;
 		font-style: italic;
-		background: #C0C0C0;
+		background: #FFF8DC;
 		border-radius: 5px;
 	}
 	#logout:hover{
-		background: #808080;
+		background: #C0C0C0;
 	}
 	#infoFm{
 		width: 300px;
@@ -53,7 +53,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-	<!-- <h1 style="font-size: 20px; font-style: italic;" align="center">💸Save!!💰</h1><br><br> -->
 <%
 String id = null;
 	if(session.getAttribute("id") != null){

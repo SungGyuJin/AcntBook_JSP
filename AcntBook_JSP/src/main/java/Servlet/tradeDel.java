@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import Dao.DBcon;
 
-@WebServlet("/Del")
-public class Del extends HttpServlet {
+@WebServlet("/tradeDel")
+public class tradeDel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

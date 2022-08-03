@@ -17,6 +17,8 @@
 	String yearParam = request.getParameter("year");
 	String monthParam= request.getParameter("month");
 	String dateParam = request.getParameter("param");
+	String regDate = request.getParameter("regDate");
+	
 	if(yearParam == null){
 		yearParam = Integer.toString(year);
 	}
@@ -26,7 +28,7 @@
 	if(dateParam == null){
 		dateParam = Integer.toString(date);
 	}
-	String sql = "Select * From acntAdd Where year = " + yearParam + " and month = " + (Integer.parseInt(monthParam)+1) + " and dat = "+dateParam+"";
+	String sql = "Select * From acntAdd Where year = " + yearParam + " and month = " + (Integer.parseInt(monthParam)+1) + " and dat = "+dateParam+"Order by kind asc";
 	Connection con = DBcon.getConnection();
 	Statement stmt = con.createStatement();
 	ResultSet rs = stmt.executeQuery(sql);
@@ -41,25 +43,43 @@
 		text-align: center;
 	}
 	#tradeInfo{
+		table-layout: fixed;
 		width: 100%;
 		text-align: center;
 	}
 	#addKind{
+		width: 30%;
+		height: 100px;
 		background-color: #00CCCC;
-		border-radius: 3px;
+		border-radius: 20px;
 	}
 	#subKind{
+		width: 30%;
+		height: 100px;
 		background-color: #FF6699;
-		border-radius: 3px;
+		border-radius: 20px;
 	}
 	#btn_del{
 		width: 100%;
 		font-size: 40px;
+		background: #DCDCDC;
+	}
+	#btn_del:hover{
+		background: #A9A9A9;
+	}
+	#btn_modify{
+		width: 50%;
+		font-size: 40px;
+		background: #87CEFA;
+		margin-top: 10px;
+	}
+	#btn_modify:hover{
+		background: #00BFFF;
 	}
 	#input_chk{
-		margin-top: 10px;	
-		width: 40px;
-		height: 40px;
+		margin-top: 6%;
+		width: 100%;
+		height: 60px;
 	}
 	.title_date{
 		font-size: 40px;
@@ -69,6 +89,14 @@
 		font-size: 35px;
 		font-style: italic;
 	}
+	.contentBox{
+		width: 100%;
+		height: 100px;
+		color: white;
+		background: #212529;
+		border: none;
+		text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -77,11 +105,11 @@
 	out.println(monthParam);
 	out.println(dateParam); */
 %>
-<form action="Del" method="post">
-	<input type="hidden" name="year" value="<%= yearParam%>">
-	<input type="hidden" name="month" value="<%= monthParam%>">
-	<input type="hidden" name="dat" value="<%= dateParam%>">
-	<input type="hidden" name="regDate" value="<%= year+Integer.toString(month+1)+dateParam%>">
+<form method="post">
+	<input type="hidden" id="year" name="year" value="<%= yearParam%>">
+	<input type="hidden" id="month" name="month" value="<%= monthParam%>">
+	<input type="hidden" id="dat" name="dat" value="<%= dateParam%>">
+	<input type="hidden" id="regDate" name="regDate" value="<%= year+Integer.toString(month+1)+dateParam%>">
 		<table id="tradeInfo" class="table table-dark">
 			<tr>
 				<td class="td" colspan="4">
@@ -118,30 +146,28 @@
 				}
 				
 				list.add(kind); // 거래내역 데이터를 결정할 list에 추가
-				
 		%>
 				<tr>
-					<td class="td">
+					<td>
 						<input type="checkbox" id="input_chk" name="chkItem" value="<%= rs.getString("regNum") %>">
-					</td>
+					</td>	
 		<% 
 					if(kind.equals("➕")){
 		%>			
-					<td  width="100px" nowrap class="td" id="addKind"><%= addKind %></td>
+					<td><input id="addKind" type="button" name="kind" value="<%= addKind %>"></td>
 		<%
 					}else{
 		%>
-					<td width="100px" nowrap class="td" id="subKind"><%= subKind %></td>
+					<td><input id="subKind" type="button" name="kind" value="<%= subKind %>"></td>
 		<%
 					}
 		%>
-					<td class="td" ><%= rs.getString("item") %></td>
-					<td class="td" ><%= price %>원</td>
+					<td><input type="text" name="item" class="contentBox" value="<%= rs.getString("item") %>" readonly="readonly"></td>
+					<td><input type="text" name="item" class="contentBox" value="<%= price %>원" readonly="readonly"></td>
 				</tr>
 		<%
 			} // end while
 
-			
 				if(list.size() == 0){
 		%>
 				<tr>
@@ -155,7 +181,7 @@
 		%>
 			<tr>
 				<td colspan="4" align="center">
-					<input type="submit" id="btn_del" value="삭제" onClick="return delChk()" style="border-radius: 20px;">
+					<input type="submit" id="btn_del" name="submit_kind" value="삭제" formaction="tradeDel" onClick="return delChk()" style="border-radius: 20px;">
 				</td>
 			</tr>
 		<%
@@ -179,11 +205,9 @@
 		}
 		
 		if(!itemChk){
-			alert("삭제할 항목을 선택해주세요.");
 			return false;
 		}
 	}
-
 	
 	
 </script>

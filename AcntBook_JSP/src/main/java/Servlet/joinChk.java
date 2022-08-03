@@ -50,7 +50,7 @@ public class joinChk extends HttpServlet {
 		String url = "loginForm.jsp";
 		PrintWriter wt = response.getWriter();
 		wt.print("<script>"
-				+ 	"alert('가입완료!! 로그인해주세요!!');"
+				+ 	"alert('가입이 완료되었습니다. 로그인해주세요.');"
 				+ 	"location.href = '" + url + "';"
 			   + "</script>");
 		wt.close();

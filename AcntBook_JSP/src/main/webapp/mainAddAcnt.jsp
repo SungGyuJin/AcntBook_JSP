@@ -29,17 +29,10 @@
 	
 	// 현재 날짜
 	int nowYear = ca.get(Calendar.DAY_OF_MONTH);
-	out.print("현재월의 날짜 : " + nowYear + "<br>");;
-	out.print("month : " + month + "<br>");
-	out.print("today : " + today + "<br>");
 	
 	String stringYear = Integer.toString(year);
 	String stringMonth = Integer.toString(month+1);
 	
-	String YMT = stringYear+stringMonth+today;
-	String YM = stringYear+stringMonth;
-	out.print(YMT + "<br>");
-	out.print(YM);
 	
 	if(strYear != null){
 		year = Integer.parseInt(strYear);
@@ -55,7 +48,6 @@
 			month = 11;
 			year = year - 1;
 		}
-		
 	}
 		
 	ca.set(year, month, 1);
@@ -64,8 +56,6 @@
 	// 보여주고 싶은 월은 알아서 +- 하여 코드를 작성하자
 	int dayOfweek = ca.get(Calendar.DAY_OF_WEEK);
 	int lastDate = ca.getActualMaximum(Calendar.DAY_OF_MONTH);
-	out.print("<br>"+dayOfweek);
-	out.print("<br>"+lastDate);
 	//if(dayOfweek == 1){d = "일";}if(dayOfweek == 2){d = "월";}
 	//if(dayOfweek == 3){d = "화";}if(dayOfweek == 4){d = "수";}
 	//if(dayOfweek == 5){d = "목";}if(dayOfweek == 6){d = "금";}
@@ -96,7 +86,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Acnt</title>
+<title>AcntBook</title>
 <style>
 	#calMove{
 		table-layout: fixed;
@@ -105,11 +95,6 @@
 		font-size: x-large;
 		width: 100%;
 		background-color: white;
-	}
-	#calMove_font{
-		color: black;
-		font-style: italic;
-		font-size: 50px;
 	}
 	#calMain{
 		table-layout: fixed;
@@ -167,7 +152,7 @@
 	a:hover{text-decoration: none; color: #646464;}
 	
 	.th{
-		font-size: 20px;
+		font-size: 40px;
 		font-style: italic;
 		background-color: ;
 	}
@@ -181,14 +166,12 @@
 		font-weight: bold;
 		font-size: x-large;
 	}
-	
-	/* div 화면 등분*/
 	div{
-		width:50%;
+		width: 50%;
 		float: left;
 	}
 	div.left{
-		width:50%;
+		width: 50%;
 		float: left;
 	}
 	div.right{
@@ -198,66 +181,69 @@
 	.mouse_hover{
 		cursor: pointer;
 	}
-	
 	.mouse_hover:hover{
 		background-color: #AFEEEE;
+		border-radius: 15px;
 	}
 	.day_text{
 		font-size: 35px;
 	}
-	#todayChk{
-		background: #FFA07A;
+	.todayChk{
+		width: 100%;
+		background: #87CEFA;
+		border-radius: 100px;
+		color: white;
+		font-size: 35px;
+	}
+	.calMove_font{
+		color: black;
+		font-style: italic;
+		font-size: 50px;
+		cursor: pointer;
+	}
+	.calMove_font:hover{
+		background: #A9A9A9;
+		border-radius: 15px;
 	}
 </style>
 <script type="text/javascript">
-	window.history.forward();
+	/* window.history.forward();
 	function noBack(){
 		window.history.forward();
-	}
+	} */
 </script>
 </head>
-<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<!-- <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload=""> -->
+<body>
 <div class="left">
-	<%-- <table align="center">
-		<tr>
-			<td>
-				<a href="reg.jsp?year=<%=year%>&month=<%=month + 1%>&param=<%=dat%>&regDate=<%=year+Integer.toString(month+1)+dat%>" onClick="return regChk()">
-					<img src="plus.png" style="width: 80px; margin: auto;">
-				</a>
-			</td>
-		</tr>	
-	</table> --%>
-	<table id="calMove" class="table table-striped">
+	<table id="calMove" class="table table-striped" border="1">
 		<thead>
 			<tr>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%=year - 1%>&month=<%=month%>">◀◀</a></td>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%=year%>&month=<%=month - 1%>">◀</a></td>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%= thatYear %>&month=<%= thatMonth %>&param=<%= today%>&regDate=<%=year+Integer.toString(month+1)+today %>"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%=year%>&month=<%=month + 1%>">▶</a></td>
-				<td><a id="calMove_font" href="mainAddAcnt.jsp?year=<%=year + 1%>&month=<%=month%>">▶▶</a></td>
-		 </tr>
+				<td class="calMove_font" onClick="location.href='mainAddAcnt.jsp?year=<%=year - 1%>&month=<%=month%>'">◀◀</td>
+				<td class="calMove_font" onClick="location.href='mainAddAcnt.jsp?year=<%=year%>&month=<%=month - 1%>'">◀</td>
+				<td class="calMove_font" onClick="location.href='mainAddAcnt.jsp?year=<%= thatYear %>&month=<%= thatMonth %>&param=<%= today%>&regDate=<%=year+Integer.toString(month+1)+today %>'"><span><%=year%>&nbsp;/&nbsp;<%=month + 1%></span></a></td>
+				<td class="calMove_font" onClick="location.href='mainAddAcnt.jsp?year=<%=year%>&month=<%=month + 1%>'">▶</td>
+				<td class="calMove_font" onClick="location.href='mainAddAcnt.jsp?year=<%=year + 1%>&month=<%=month%>'">▶▶</td>
+		 	</tr>
 		</thead>
 	</table>
 	<br>
-	<table id="calMain" class="table table-striped" border="1">
+	<table id="calMain" class="table table-Success">
 		<thead>
 			<tr>
-				<th style="color: red; font-size: 20px; font-style: italic;">Sun</th>
+				<th style="color: red; font-size: 40px; font-style: italic;">Sun</th>
 				<th class="th">Mon</th>
 				<th class="th">Tue</th>
 				<th class="th">Wed</th>
 				<th class="th">Thu</th>
 				<th class="th">Fri</th>
-				<th style="color: blue; font-size: 20px; font-style: italic;">Sat</th>
+				<th style="color: blue; font-size: 40px; font-style: italic;">Sat</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<%
 				DecimalFormat df = new DecimalFormat("###,###");
-				
-				int addComma = 0;
-				int subComma = 0;
 				
 				// 1일 시작 날짜 and 1 2 3 4 ... 31 테이블 하나당 날짜찍기
 				// 한 주의 토요일이 끝나면 개행
@@ -274,8 +260,6 @@
 				Connection conn = DBcon.getConnection();
 				Statement stmt = conn.createStatement();
 				
-				String YMD = "";
-				
 				// 빈칸은 끝났다 이제 말일까지 날짜를 찍자
 				for(int day = 1; day <= lastDate; day++){
 					ArrayList<String> list = new ArrayList<>();
@@ -284,7 +268,6 @@
 					String addMon = "";
 					String subMon = "";
 					count++;
-					YMD = YM + Integer.toString(day);
 					
 					// 토요일
 					if(count % 7 == 0){
@@ -306,13 +289,25 @@
 								}
 							}
 						}	// while end
+						
+						if(today == day && month+1 == 8 && year == 2022){
 				%>
-					<td width="100px" nowrap class="mouse_hover" valign="top" align="center" id="sat" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
-						<br><span class="day_text"><%= day %></span><br>
-						<span id="addMon"><%= addMon %></span><br>
-						<span id="subMon"><%= subMon %></span><br>
-					</td>
+							<td class="mouse_hover" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+								<div class="todayChk">Today</div>
+								<br><br><span class="day_text"><%= day %></span><br>
+								<span id="addMon"><%= addMon %></span><br>
+								<span id="subMon"><%= subMon %></span><br>
+							</td>
+				<%
+						}else{
+				%>
+							<td width="100px" nowrap class="mouse_hover" valign="top" align="center" id="sat" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+								<br><br><span class="day_text"><%= day %></span><br>
+								<span id="addMon"><%= addMon %></span><br>
+								<span id="subMon"><%= subMon %></span><br>
+							</td>
 				<%		
+						}
 					// 일요일
 					}else if(count % 7 == 1){
 						ResultSet rs = stmt.executeQuery(sql);
@@ -332,13 +327,26 @@
 								}
 							}
 						}	// while end
+						
+						if(today == day && month+1 == 8 && year == 2022){
 				%>
-					<td class="mouse_hover" valign="top" align="center" id="sun" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
-						<br><span class="day_text"><%= day %></span><br>
-						<span id="addMon"><%= addMon %></span><br>
-						<span id="subMon"><%= subMon %></span><br>
-					</td>
+							<td class="mouse_hover" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+								<div class="todayChk">Today</div>
+								<br><br><span class="day_text"><%= day %></span><br>
+								<span id="addMon"><%= addMon %></span><br>
+								<span id="subMon"><%= subMon %></span><br>
+							</td>
 				<%
+						}else{
+						
+				%>
+							<td class="mouse_hover" valign="top" align="center" id="sun" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+								<br><br><span class="day_text"><%= day %></span><br>
+								<span id="addMon"><%= addMon %></span><br>
+								<span id="subMon"><%= subMon %></span><br>
+							</td>
+				<%
+						}
 					// 평일
 					}else{ 
 						ResultSet rs = stmt.executeQuery(sql);
@@ -362,19 +370,20 @@
 						
 						if(today == day && month+1 == 8 && year == 2022){
 				%>
-						<td class="mouse_hover" style="background: #FFA07A;" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
-								<br><span class="day_text"><%= day %></span><br>
+							<td class="mouse_hover" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+								<div class="todayChk">Today</div>
+								<br><br><span class="day_text"><%= day %></span><br>
 								<span id="addMon"><%= addMon %></span><br>
 								<span id="subMon"><%= subMon %></span><br>
 							</td>
 				<%
 						}else{
 				%>
-						<td class="mouse_hover" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
-							<br><span class="day_text"><%= day %></span><br>
-							<span id="addMon"><%= addMon %></span><br>
-							<span id="subMon"><%= subMon %></span><br>
-						</td>
+							<td class="mouse_hover" valign="top" align="center" id="basic_td" onClick="location.href='mainAddAcnt.jsp?year=<%= year %>&month=<%= month %>&param=<%= day%>&regDate=<%=year+Integer.toString(month+1)+day %>'">
+								<br><br><span class="day_text"><%= day %></span><br>
+								<span id="addMon"><%= addMon %></span><br>
+								<span id="subMon"><%= subMon %></span><br>
+							</td>
 				<%		
 						}
 					}
@@ -408,11 +417,11 @@
 	</table>
 </div>
 <div class="right">
-	<jsp:include page="reg.jsp" />
-	<br><br>
 	<jsp:include page="tradeInfo.jsp" />
 </div>
+	<jsp:include page="reg.jsp" />
 <script>
+
 </script>
 </body>
 </html>

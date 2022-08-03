@@ -51,9 +51,9 @@
 		<input type="text" class="content" id="name" name="name" placeholder="NAME"><br><br>
 		<input type="text" class="content" id="id" name="id" placeholder="ID"><br><br>
 		<input type="password" class="content" id="pw" name="pw" placeholder="Password"><br><br>
-		<input type="password" class="content" id="pwChk" name="pwChk" placeholder="Password Confirmation"><br><br>
-		<input type="button" id="btn" value="Go" onclick="return joinChk()">
-		<input type="button" id="btn" value="Back" onclick="location.href='loginForm.jsp'">
+		<input type="password" class="content" id="pwChk" name="pwChk" placeholder="Confirmation Password"><br><br>
+		<input type="submit" id="btn" value="Go" onClick="return joinChk()">
+		<input type="button" id="btn" value="Back" onClick="location.href='loginForm.jsp'">
 	</form>
 	
 <script type="text/javascript">
@@ -63,7 +63,7 @@
 	var join_pw = document.querySelector("#pw");
 	var join_pwChk = document.querySelector("#pwChk");
 	
-	function joinChk(){
+	function joinChk() {
 		
 		if(join_name.value == ""){
 			alert("이름을 입력해주세요.");
@@ -87,14 +87,12 @@
 		}
 		if(join_pw.value != join_pwChk.value){
 			alert("패스워드가 서로 일치하지않습니다.");
+			join_pw.value = "";
+			join_pwChk.value = "";
 			return false;
 		}
 		
-		alert("가입이 완료되었습니다. 로그인해주세요.");
-		
-		return true;
 	}
-
 
 
 
